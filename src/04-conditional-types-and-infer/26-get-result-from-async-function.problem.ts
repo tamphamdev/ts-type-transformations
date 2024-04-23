@@ -6,17 +6,21 @@ const getServerSideProps = async () => {
   return {
     props: {
       json,
+      isCool: true,
     },
   };
 };
 
-type InferPropsFromServerSideFunction = unknown;
+// type InferPropsFromServerSideFunction<T extends (...args: any) => any> =  Awaited<ReturnType<T>> extends {props: infer TJSON}  ? TJSON: never;
+type InferPropsFromServerSideFunction<T> = T extends () => Promise<{
+  props: infer P
+}> ? P : never
 
 type tests = [
   Expect<
     Equal<
       InferPropsFromServerSideFunction<typeof getServerSideProps>,
-      { json: { title: string } }
+      { json: { title: string }, isCool: boolean }
     >
   >
 ];
