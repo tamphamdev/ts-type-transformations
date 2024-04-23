@@ -1,7 +1,4 @@
 import { Equal, Expect } from "../helpers/type-utils";
-type Item = {
-  data :{name?: string, age?: number} | string
-}
 // type GetDataValue<T> = T extends  Item ? T['data'] : never;
 
 type GetDataValue<T> = T extends {data: infer TData} ? TData : never
