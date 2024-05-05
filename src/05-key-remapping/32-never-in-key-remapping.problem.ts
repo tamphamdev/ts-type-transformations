@@ -8,8 +8,13 @@ interface Example {
   groupId: string;
 }
 
-type OnlyIdKeys<T> = unknown;
+type SearchForId = `${string}${"id" | "Id"}${string}`
 
+type OnlyIdKeys<T> = {
+  [K in keyof T as K  extends SearchForId  ? K : never]: T[K]
+};
+
+type Test = OnlyIdKeys<Example>
 type tests = [
   Expect<
     Equal<
