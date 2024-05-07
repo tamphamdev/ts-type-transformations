@@ -12,7 +12,9 @@ type Route =
   | { route: "/admin"; search: {} }
   | { route: "/admin/users"; search: {} };
 
-type RoutesObject = unknown;
+  // R ở đây là từng object trong Route, và key của object chỉ có thể là
+  // string | number | symbol => tuy nhiên ta gán as để có thể dùng được R in Route
+type RoutesObject = {[R in Route as R['route']]: R['search']}
 
 type tests = [
   Expect<
