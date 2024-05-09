@@ -7,9 +7,9 @@ interface Values {
 }
 
 type ValuesAsUnionOfTuples = {
-  [K in keyof Values]: [K, Values[K]]
+  [V in keyof Values]: [V, Values[V]]
 }[keyof Values];
-;
+
 
 type tests = [
   Expect<
